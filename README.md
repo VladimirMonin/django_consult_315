@@ -83,3 +83,10 @@
 ```bash
 django-admin startproject barbershop .
 ```
+
+2. Создайте новое Django приложение:
+```bash
+python manage.py startapp core
+```
+
+**django: создание приложения и первоначальная настройка**
