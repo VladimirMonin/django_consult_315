@@ -165,3 +165,22 @@ python manage.py createsuperuser
 ``` 
 
 **django: подключение модели Visit к админ-панели Django**
+
+### Создание простой формы не связанной с моделью
+
+```python
+
+from django import forms
+
+
+class VisitForm(forms.Form):
+    # Классы form-control, placeholder
+    name = forms.CharField(label='Имя', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Имя', 'class': 'form-control'}))
+    phone = forms.CharField(label='Телефон', max_length=20, widget=forms.TextInput(attrs={'type': 'tel', 'placeholder': 'Номер телефона', 'class': 'form-control'}))
+    comment = forms.CharField(label='Комментарий', required=False, widget=forms.Textarea(attrs={'placeholder': 'Комментарий', 'class': 'form-control'}))
+
+```
+
+Подключили форму во вью и шаблоне. Но пока не сделали обработку формы.
+
+**django: создание формы VisitForm**

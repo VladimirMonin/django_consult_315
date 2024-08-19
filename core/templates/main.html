@@ -74,5 +74,9 @@
     <h2 id="orderForm"
     >Запись на стрижку</h2>
     {% comment %} Тут будет рендер Django формы {% endcomment %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
 </section>
 {% endblock %}
