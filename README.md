@@ -145,3 +145,23 @@ python manage.py makemigrations && python manage.py migrate
 #TODO - подключить статику (свои стили и скриты)
 
 **django: шаблоны**
+
+### Подключение модели `Visit` к админ-панели Django
+
+1. Зарегистрировали модель `Visit` в админ-панели Django используя класс:
+```python
+from .models import Visit
+
+@admin.register(Visit)
+class VisitAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'created_at', 'status')
+    list_filter = ('status', 'created_at')
+    search_fields = ('name', 'phone', 'comment')
+```
+
+2. Создали суперпользователя для доступа к админ-панели:
+```bash
+python manage.py createsuperuser
+``` 
+
+**django: подключение модели Visit к админ-панели Django**
