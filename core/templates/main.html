@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% comment %}
+1. title - заголовок страницы
+2. header - шапка сайта
+3. content - основное содержимое
+4. footer - подвал сайта
+{% endcomment %}
+{% comment %} Вставляем в header 
+навигационное меню с якорными ссылками {% endcomment %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Барбершоп Арбуз</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#masters">Мастера</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Услуги</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#reviews">Отзывы</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#orderForm">Запись на стрижку</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+{% endblock %}
+
+{% comment %} Делаем секции лендинга
+используя семантический тег section {% endcomment %}
+
+{% block content %}
+<section>
+    <h2>О нас</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ipsum aut asperiores esse cumque pariatur, numquam minus dolore earum veritatis itaque saepe atque doloribus sequi delectus facilis est excepturi ipsa quia! Corrupti illo ullam, autem obcaecati magni dignissimos asperiores repudiandae illum nemo dolore in aliquam natus? Iusto ab quos illum.
+    </p>
+</section>
+<section>
+    <h2 id="masters"
+    >Наши мастера</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ipsum aut asperiores esse cumque pariatur, numquam minus dolore earum veritatis itaque saepe atque doloribus sequi delectus facilis est excepturi ipsa quia! Corrupti illo ullam, autem obcaecati magni dignissimos asperiores repudiandae illum nemo dolore in aliquam natus? Iusto ab quos illum.
+    </p>
+</section>
+<section>
+    <h2 id="services"
+    >Услуги</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ipsum aut asperiores esse cumque pariatur, numquam minus dolore earum veritatis itaque saepe atque doloribus sequi delectus facilis est excepturi ipsa quia! Corrupti illo ullam, autem obcaecati magni dignissimos asperiores repudiandae illum nemo dolore in aliquam natus? Iusto ab quos illum.
+    </p>
+</section>
+<section>
+    <h2 id="reviews"
+    >Отзывы</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ipsum aut asperiores esse cumque pariatur, numquam minus dolore earum veritatis itaque saepe atque doloribus sequi delectus facilis est excepturi ipsa quia! Corrupti illo ullam, autem obcaecati magni dignissimos asperiores repudiandae illum nemo dolore in aliquam natus? Iusto ab quos illum.
+    </p>
+</section>
+<section>
+    <h2 id="orderForm"
+    >Запись на стрижку</h2>
+    {% comment %} Тут будет рендер Django формы {% endcomment %}
+</section>
+{% endblock %}
