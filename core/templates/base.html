@@ -31,7 +31,9 @@
   <body>
     <header class='sticky-top'>{% block header %} {% endblock %}</header>
     <main>{% block content %} {% endblock %}</main>
-    <footer>{% block footer %} {% endblock %}</footer>
+    <footer>{% block footer %}
+        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa854c29f2a7ebf7ac789606c6a47bba6d3d4dc16c5bd8dbc99021d50f36c1a6c&amp;width=1114&amp;height=720&amp;lang=ru_RU&amp;scroll=true"></script>
+        {% endblock %}</footer>
 
     {% comment %} Подключение BS5 скриптов {% endcomment %}
     <script
