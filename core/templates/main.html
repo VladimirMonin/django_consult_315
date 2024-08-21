@@ -1,20 +1,19 @@
-{% extends "base.html" %} {% comment %} 1. title - заголовок страницы 2. header
-- шапка сайта 3. content - основное содержимое 4. footer - подвал сайта {%
-endcomment %} {% comment %} Вставляем в header навигационное меню с якорными
-ссылками {% endcomment %} {% block header %}
+{% extends "base.html" %} 
+{% comment %} 
+1. title - заголовок страницы 
+2. header - шапка сайта 
+3. content - основное содержимое 
+4. footer - подвал сайта 
+{% endcomment %} 
+{% comment %} 
+Вставляем в header навигационное меню с якорными ссылками 
+{% endcomment %} 
 
+{% block header %}
 <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Барбершоп Арбуз</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Переключатель навигации"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -38,62 +37,52 @@ endcomment %} {% comment %} Вставляем в header навигационн�
     </div>
   </div>
 </nav>
+{% endblock %}
 
-{% endblock %} {% block content %}
+{% block content %}
 <div class="container py-4">
   <div class="row">
+
     <section class="col-12 mb-4">
       <h2>О нас</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ipsum aut
-        asperiores esse cumque pariatur, numquam minus dolore earum veritatis
-        itaque saepe atque doloribus sequi delectus facilis est excepturi ipsa
-        quia! Corrupti illo ullam, autem obcaecati magni dignissimos asperiores
-        repudiandae illum nemo dolore in aliquam natus? Iusto ab quos illum.
+        Добро пожаловать в барбершоп "Арбуз" — место, где стиль встречается с индивидуальностью, а качество с уютом. Мы не просто подстригаем волосы, мы создаем образы, которые подчеркивают вашу уникальность. Наши мастера увлечены своим делом и готовы предложить вам не только профессиональную стрижку, но и увлекательную беседу за чашечкой ароматного кофе. В "Арбузе" каждый клиент чувствует себя важным гостем!
       </p>
     </section>
 
     <section id="masters" class="col-12 mb-4">
       <h2>Наши мастера</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ipsum aut
-        asperiores esse cumque pariatur, numquam minus dolore earum veritatis
-        itaque saepe atque doloribus sequi delectus facilis est excepturi ipsa
-        quia! Corrupti illo ullam, autem obcaecati magni dignissimos asperiores
-        repudiandae illum nemo dolore in aliquam natus? Iusto ab quos illum.
+        В барбершопе "Арбуз" работают настоящие художники парикмахерского искусства. Сочетая опыт, творческий подход и стремление к совершенству, наши мастера воплощают в жизнь любые идеи. От классических стрижек до смелых экспериментов — они готовы удовлетворить запросы самых требовательных клиентов. Каждый мастер обладает своим стилем и подходом, что делает наш барбершоп местом, где каждый найдет своего идеального мастера.
       </p>
     </section>
 
     <section id="services" class="col-12 mb-4">
       <h2>Услуги</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ipsum aut
-        asperiores esse cumque pariatur, numquam minus dolore earum veritatis
-        itaque saepe atque doloribus sequi delectus facilis est excepturi ipsa
-        quia! Corrupti illo ullam, autem obcaecati magni dignissimos asperiores
-        repudiandae illum nemo dolore in aliquam natus? Iusto ab quos illum.
+        В барбершопе "Арбуз" мы предлагаем широкий спектр услуг: от стильных и аккуратных стрижек до роскошных процедур по уходу за бородой и классическому бритью. Мы любим, чтобы каждый волосок был на своем месте, поэтому предлагаем вам насладиться сервисом высочайшего качества. Подарите себе удовольствие от царского бритья с горячими полотенцами и освежающим бальзамом, или закажите стрижку, которая подчеркнет вашу индивидуальность. В "Арбузе" мы гарантируем, что вы уйдете от нас не только с отличной стрижкой, но и с отличным настроением!
       </p>
     </section>
 
     <section id="reviews" class="col-12 mb-4">
       <h2>Отзывы</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ipsum aut
-        asperiores esse cumque pariatur, numquam minus dolore earum veritatis
-        itaque saepe atque doloribus sequi delectus facilis est excepturi ipsa
-        quia! Corrupti illo ullam, autem obcaecati magni dignissimos asperiores
-        repudiandae illum nemo dolore in aliquam natus? Iusto ab quos illum.
+        Наша работа говорит за нас, но отзывы наших клиентов говорят еще лучше. Ребята с района, деловые мужчины и стильные джентльмены — все заходят в "Арбуз" и выходят счастливыми и довольными. Нас хвалят за профессионализм, душевный прием и уникальную атмосферу, которую так сложно найти в современном мире. Присоединяйтесь к нашим постоянным клиентам, и, возможно, следующий отзыв напишете именно вы!
       </p>
     </section>
 
     <section id="orderForm" class="col-12 mb-4">
       <h2>Запись на стрижку</h2>
+      <p>
+        Хотите выглядеть как миллионы долларов? Не откладывайте возможность проявить себя — запишитесь на стрижку прямо сейчас! Наши мастера ждут вас, чтобы создать образ, который заставит вас сиять. Заполните форму, выберите удобное для вас время и приходите — остальное мы возьмем на себя!
+      </p>
       <form action="" method="post">
         {% csrf_token %}
         <div class="mb-3">{{ form.as_p }}</div>
         <button type="submit" class="btn btn-primary">Отправить</button>
       </form>
     </section>
+
   </div>
 </div>
 {% endblock %}
