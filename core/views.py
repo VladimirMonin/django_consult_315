@@ -1,24 +1,17 @@
 from django.shortcuts import render, redirect
-from .forms import VisitForm
+from .forms import VisitModelForm
 from .models import Visit, Master
 
 
 def main(request):
     if request.method == 'POST':
-        form = VisitForm(request.POST)
+        form = VisitModelForm(request.POST)
         if form.is_valid():
-            # Создание и сохранение записи в модели Visit
-            Visit.objects.create(
-                name=form.cleaned_data['name'],
-                phone=form.cleaned_data['phone'],
-                comment=form.cleaned_data.get('comment', '')
-            )
-            # Перенаправляем пользователя на страницу с благодарностью после успешного сохранения
+            form.save()
             return redirect('thanks')
     else:
-        form = VisitForm()
+        form = VisitModelForm()
 
-    # Получение всех мастеров из базы данных
     masters = Master.objects.all()
     return render(request, 'main.html', {'form': form, 'masters': masters})
 
