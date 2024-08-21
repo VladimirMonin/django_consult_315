@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import VisitForm
-from .models import Visit
+from .models import Visit, Master
 
 
 def main(request):
@@ -18,7 +18,9 @@ def main(request):
     else:
         form = VisitForm()
 
-    return render(request, 'main.html', {'form': form})
+    # Получение всех мастеров из базы данных
+    masters = Master.objects.all()
+    return render(request, 'main.html', {'form': form, 'masters': masters})
 
 
 def thanks(request):
