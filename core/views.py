@@ -1,25 +1,28 @@
 from django.shortcuts import render, redirect
-from .forms import VisitForm
 from .models import Visit
 
 
 def main(request):
-    pass
-    # if request.method == 'POST':
-    #     form = VisitForm(request.POST)
-    #     if form.is_valid():
-    #         # Создание и сохранение записи в модели Visit
-    #         Visit.objects.create(
-    #             name=form.cleaned_data['name'],
-    #             phone=form.cleaned_data['phone'],
-    #             comment=form.cleaned_data.get('comment', '')
-    #         )
-    #         # Перенаправляем пользователя на страницу с благодарностью после успешного сохранения
-    #         return redirect('thanks')
-    # else:
-    #     form = VisitForm()
+    if request.method == 'POST':
+        # Получаем данные из формы
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        comment = request.POST.get('comment', '')
 
-    # return render(request, 'main.html', {'form': form})
+        
+        # Создаем новую запись посещения в базе данных
+        Visit.objects.create(
+            name=name,
+            phone=phone,
+            comment=comment,
+
+        )
+        
+        # Перенаправляем на страницу благодарности после успешного создания записи
+        return redirect('thanks')
+    
+    # Обработка GET-запроса или других типов запросов
+    return render(request, 'main.html')
 
 
 def thanks(request):

@@ -78,8 +78,20 @@
       </p>
       <form action="" method="post">
         {% csrf_token %}
-        <div class="mb-3">{{ form.as_p }}</div>
-        <button type="submit" class="btn btn-primary">Отправить</button>
+        <div class="mb-3">
+          <label for="name" class="form-label">Имя</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Телефон</label>
+          <input type="text" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="mb-3">
+          <label for="comment" class="form-label">Комментарий</label>
+          <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-dark">Отправить</button>
       </form>
     </section>
 
