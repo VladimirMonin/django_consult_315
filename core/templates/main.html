@@ -78,6 +78,12 @@
       </p>
       <form action="" method="post">
         {% csrf_token %}
+        {% comment %} Если error_message - даем сообщение {% endcomment %}
+       {% if error_message %}
+       <div class="alert alert-danger" role="alert">
+        {{ error_message }}
+        </div>
+        {% endif %}
         <div class="mb-3">
           <label for="name" class="form-label">Имя</label>
           <input type="text" class="form-control" id="name" name="name" required>
