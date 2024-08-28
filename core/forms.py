@@ -20,7 +20,12 @@ class VisitForm(forms.Form):
 
 
 class VisitModelForm(forms.ModelForm):
-    # Какие поля мы хотим видить?
     class Meta:
         model = Visit
         fields = ['name', 'phone', 'comment']
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'comment': forms.Textarea(attrs={'class': 'form-control'}),
+        }
