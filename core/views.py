@@ -4,16 +4,23 @@ from .models import Visit, Master, Service
 from django.http import JsonResponse
 
 def main(request):
+    # Мастера для карусели фоточек (в форму данные берутся и по мастерам и по услугам автоматически)
+    masters = Master.objects.all()
+    
     if request.method == 'POST':
         form = VisitModelForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('thanks')
+        
+        # Отдаем заполненную форму с ошибку
+        if form.errors:
+            return render(request, "main.html", {"form": form, 'masters': masters})
+
     else:
         form = VisitModelForm()
 
-    # Мастера для карусели фоточек (в форму данные берутся и по мастерам и по услугам автоматически)
-    masters = Master.objects.all()
+    
     return render(request, 'main.html', {'form': form, 'masters': masters})
 
 
