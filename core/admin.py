@@ -19,4 +19,4 @@ class MasterAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('name', 'price',)
     search_fields = ('name', 'description')
-    filter_horizontal = ('masters',)  # Для удобного выбора множества мастеров
+    
