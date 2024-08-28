@@ -1,4 +1,5 @@
 from django import forms
+from .models import Visit
 
 
 class VisitForm(forms.Form):
@@ -16,3 +17,10 @@ class VisitForm(forms.Form):
             # Поднимаем исключение, которое попадет в контекст шаблона
             raise forms.ValidationError("Имя должно быть строкой")
         return name
+
+
+class VisitModelForm(forms.ModelForm):
+    # Какие поля мы хотим видить?
+    class Meta:
+        model = Visit
+        fields = ['name', 'phone', 'comment']

@@ -1,24 +1,19 @@
 from django.shortcuts import render, redirect
 from .models import Visit
 from .validators import super_validator
-from .forms import VisitForm
+from .forms import VisitForm, VisitModelForm
 
 
 def main(request):
     if request.method == 'POST':
         # Создаем экземпляр формы
-        form = VisitForm(request.POST)
+        form = VisitModelForm(request.POST)
 
         # Проверяем, что форма валидна
         if form.is_valid():
-            # Создаем новую запись посещения в базе данных
-            visit = Visit(
-                # cleaned_data - словарь с очищенными данными из формы, после валидации
-                name=form.cleaned_data["name"],
-                phone=form.cleaned_data["phone"],
-                comment=form.cleaned_data["comment"],
-            )
-            visit.save()
+            # Теперь сохранение будет быстрее. Просто сохраняем данные
+            form.save()
+            
             # Перенаправляем на страницу благодарности после успешного создания записи
             return redirect('thanks')
     
@@ -28,7 +23,7 @@ def main(request):
     
     else:
         # Обработка GET-запроса или других типов запросов
-        return render(request, "main.html", {"form": VisitForm()})
+        return render(request, "main.html", {"form": VisitModelForm()})
 
 
 def thanks(request):
