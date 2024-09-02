@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import VisitModelForm
 from .models import Visit, Master, Service
 from django.http import JsonResponse
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, FormView
 
 MENU = [
         {'title': 'Главная', 'url': '/', 'active': True},
@@ -46,16 +46,6 @@ class MainView(View):
             )
 
 
-class ThanksView(View):
-    """
-    Метод get - отвечает за запросы GET
-    Есть еще и другие методы, например post, put, delete и т.д.
-    """
-    
-    def get(self, request):
-        return render(request, "thanks.html", get_menu_context())
-
-
 def get_services_by_master(request, master_id):
     services = Master.objects.get(id=master_id).services.all()
     services_data = [{'id': service.id, 'name': service.name} for service in services]
@@ -69,3 +59,16 @@ class ThanksTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context.update(get_menu_context())
         return context
+
+
+# VisitFormView
+
+class VisitFormView(FormView):
+    template_name = "visit_form.html"
+    form_class = VisitModelForm
+    success_url = "/thanks/"
+    context = get_menu_context()
+    
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

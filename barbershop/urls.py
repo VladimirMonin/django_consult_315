@@ -1,6 +1,11 @@
 from django.contrib import admin
 from django.urls import path
-from core.views import get_services_by_master, ThanksView, MainView, ThanksTemplateView
+from core.views import (
+    get_services_by_master,
+    MainView,
+    ThanksTemplateView,
+    VisitFormView,
+)
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -13,6 +18,7 @@ urlpatterns = [
         get_services_by_master,
         name="get_services_by_master",
     ),
+    path("visit-form/", VisitFormView.as_view(), name="visit-form"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
