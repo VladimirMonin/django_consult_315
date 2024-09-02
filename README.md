@@ -184,3 +184,34 @@ class VisitForm(forms.Form):
 Подключили форму во вью и шаблоне. Но пока не сделали обработку формы.
 
 **django: создание формы VisitForm**
+
+
+## Lesson 63. Django Classes-based views
+
+### View - базовый класс для создания представлений
+
+1. Импорт базового класса `View` из модуля `django.views.generic`:
+
+```python
+from django.views.generic import View
+```
+
+2. Создание класса `ThanksView` на основе базового класса `View`:
+
+В котором можно описать методы по названию типа запроса:
+
+```python
+class ThanksView(View):
+    """
+    Метод get - отвечает за запросы GET
+    Есть еще и другие методы, например post, put, delete и т.д.
+    """
+    def get(self, request):
+        return render(request, "thanks.html")
+```
+
+3. Подключение класса `ThanksView` к URL-пути:
+
+И вызвать там специальный метод `as_view()`, который вернет функцию-обработчик.
+
+
