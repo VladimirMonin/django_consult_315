@@ -18,8 +18,9 @@ from core.views import (
     get_services_by_master,
     MainView,
     ThanksTemplateView,
-    VisitFormView,
     VisitCreateView,
+    VisitDetailView,
+    VisitUpdateView,
 )
 from django.conf.urls.static import static
 from django.conf import settings
@@ -33,7 +34,12 @@ urlpatterns = [
         get_services_by_master,
         name="get_services_by_master",
     ),
+    # CRUD для Visit 
     path("visit-form/", VisitCreateView.as_view(), name="visit-form"),
+    # Read на DetailView
+    path("visit/<int:pk>/view/", VisitDetailView.as_view(), name="visit-view"),
+    # Update на UpdateView
+    path("visit/<int:pk>/edit/", VisitUpdateView.as_view(), name="visit-edit"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
