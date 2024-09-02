@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.urls import path
-from core.views import main, get_services_by_master, ThanksView
+from core.views import get_services_by_master, ThanksView, MainView
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", main),
+    path("", MainView.as_view(), name="main"),
     path("thanks/", ThanksView.as_view(), name="thanks"),
     path(
         "get_services_by_master/<int:master_id>/",
