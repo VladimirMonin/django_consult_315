@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import VisitModelForm
 from .models import Visit, Master, Service
 from django.http import JsonResponse
-from django.views.generic import View # Импорт базового View класса
+from django.views.generic import View, TemplateView
 
 MENU = [
         {'title': 'Главная', 'url': '/', 'active': True},
@@ -23,7 +23,6 @@ class MainView(View):
     Есть еще и другие методы, например post, put, delete и т.д.
     """
     
-
     def get(self, request):
         menu = get_menu_context()
         form = VisitModelForm()
@@ -62,3 +61,11 @@ def get_services_by_master(request, master_id):
     services_data = [{'id': service.id, 'name': service.name} for service in services]
     return JsonResponse({'services': services_data})
 
+
+class ThanksTemplateView(TemplateView):
+    template_name = "thanks.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_menu_context())
+        return context
