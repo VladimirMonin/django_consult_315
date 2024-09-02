@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import VisitModelForm
 from .models import Visit, Master, Service
 from django.http import JsonResponse
-from django.views.generic import View, TemplateView, FormView
+from django.views.generic import View, TemplateView, FormView, CreateView
+from django.urls import reverse_lazy
 
 MENU = [
         {'title': 'Главная', 'url': '/', 'active': True},
@@ -68,7 +69,19 @@ class VisitFormView(FormView):
     form_class = VisitModelForm
     success_url = "/thanks/"
     context = get_menu_context()
-    
+
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+
+class VisitCreateView(CreateView):
+    template_name = "visit_form.html"
+    model = Visit
+    # fields = ["name", "phone", "comment", "master", "services"] # Мы можем обойтись даже без формы!!!
+    form_class = VisitModelForm
+    # Подтянем url по псевдониму thanks\
+    # Функция для поиска маршрутов по имени
+    success_url = reverse_lazy("thanks")
+ 
+    
