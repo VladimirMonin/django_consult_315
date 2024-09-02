@@ -2,41 +2,7 @@
 - шапка сайта 3. content - основное содержимое 4. footer - подвал сайта {%
 endcomment %} {% comment %} Вставляем в header навигационное меню с якорными
 ссылками {% endcomment %} {% block header %}
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Барбершоп Арбуз</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Переключатель навигации"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Главная</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#masters">Мастера</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#services">Услуги</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#reviews">Отзывы</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#orderForm">Запись на стрижку</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+{% include 'menu.html' %}
 {% endblock %} {% block content %}
 <div class="container py-4">
   <div class="row">
