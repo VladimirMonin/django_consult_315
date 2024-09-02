@@ -2,12 +2,9 @@ import os
 import logging
 import telegram
 from dotenv import load_dotenv
-import asyncio
-
 
 # Настройка логирования
 logging.basicConfig(level=logging.DEBUG)
-
 
 async def send_telegram_message(token, chat_id, message, parse_mode="Markdown"):
     try:
