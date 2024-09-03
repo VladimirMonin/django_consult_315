@@ -35,7 +35,7 @@ urlpatterns = [
         name="get_services_by_master",
     ),
     # CRUD для Visit 
-    path("visit-form/", VisitCreateView.as_view(), name="visit-form"),
+    path("visit/add/", VisitCreateView.as_view(), name="visit-form"),
     # Read на DetailView
     path("visit/<int:pk>/view/", VisitDetailView.as_view(), name="visit-view"),
     # Update на UpdateView
