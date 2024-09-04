@@ -126,6 +126,7 @@ class VisitListView(ListView):
     template_name = "visit_list.html"
     model = Visit
     context_object_name = "visits"
+    paginate_by = 5
 
     def get_queryset(self):
         """
@@ -144,3 +145,17 @@ class VisitListView(ListView):
                 Q(name__icontains=search_query) | Q(phone__icontains=search_query)
             )
         return queryset
+    
+    def get_context_data(self, **kwargs):
+        """
+        Расширяем служебный метод get_context_data()
+        Для передачи в контекст шаблона дополнительных данных
+        касательно поисковой строки
+        """
+        context = super().get_context_data(**kwargs)
+        search_query = self.request.GET.get('search')
+        if search_query:
+            context['search'] = search_query
+        return context
+    
+    
