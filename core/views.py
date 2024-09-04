@@ -56,10 +56,14 @@ class MainView(View):
             )
 
 
-def get_services_by_master(request, master_id):
-    services = Master.objects.get(id=master_id).services.all()
-    services_data = [{'id': service.id, 'name': service.name} for service in services]
-    return JsonResponse({'services': services_data})
+class ServicesByMasterView(View):
+    
+    def get(self, request, master_id):
+        services = Master.objects.get(id=master_id).services.all()
+        services_data = [
+            {"id": service.id, "name": service.name} for service in services
+        ]
+        return JsonResponse({"services": services_data})
 
 
 class ThanksTemplateView(TemplateView):
