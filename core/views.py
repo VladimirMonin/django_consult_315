@@ -114,3 +114,9 @@ class VisitDeleteView(DeleteView):
     template_name = "visit_confirm_delete.html"
     model = Visit
     success_url = reverse_lazy("thanks")
+
+
+class VisitListView(ListView):
+    template_name = "visit_list.html"
+    model = Visit
+    context_object_name = "visits"

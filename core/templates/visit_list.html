@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Список заявок{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Список заявок</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Телефон</th>
+                <th>Дата создания</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for visit in visits %}
+            <tr>
+                <td><a href="{% url 'visit-view' visit.pk %}">{{ visit.name }}</a></td>
+                <td><a href="tel:{{ visit.phone }}">{{ visit.phone }}</a></td>
+                <td>{{ visit.created_at }}</td>
+                <td>{{ visit.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'visit-delete' visit.pk %}" class="btn btn-danger my-2">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                    <a href="{% url 'visit-edit' visit.pk %}" class="btn btn-dark my-2">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <a href="{% url 'visit-view' visit.pk %}" class="btn btn-dark my-2">
+                        <i class="bi bi-eye"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
