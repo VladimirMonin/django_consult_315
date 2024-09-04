@@ -2,7 +2,16 @@ from django.shortcuts import render, redirect
 from .forms import VisitModelForm
 from .models import Visit, Master, Service
 from django.http import JsonResponse
-from django.views.generic import View, TemplateView, FormView, CreateView, DetailView, UpdateView
+from django.views.generic import (
+    View,
+    TemplateView,
+    FormView,
+    CreateView,
+    DetailView,
+    UpdateView,
+    ListView,
+    DeleteView,
+)
 from django.urls import reverse_lazy
 
 MENU = [
@@ -95,9 +104,13 @@ class VisitUpdateView(UpdateView):
     success_url = reverse_lazy("thanks")
 
     
-
-
 class VisitDetailView(DetailView):
     template_name = "visit_detail.html"
     model = Visit
     context_object_name = "visit"
+
+
+class VisitDeleteView(DeleteView):
+    template_name = "visit_confirm_delete.html"
+    model = Visit
+    success_url = reverse_lazy("thanks")
