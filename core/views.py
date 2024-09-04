@@ -13,6 +13,8 @@ from django.views.generic import (
     DeleteView,
 )
 from django.urls import reverse_lazy
+from django.db.models import Q
+
 
 MENU = [
         {'title': 'Главная', 'url': '/', 'active': True},
@@ -124,3 +126,21 @@ class VisitListView(ListView):
     template_name = "visit_list.html"
     model = Visit
     context_object_name = "visits"
+
+    def get_queryset(self):
+        """
+        Расширили служебный метод get_queryset()
+        Который поставляет в контекст шаблона список записей
+        """
+        # Используя родителя получили все
+        queryset = super().get_queryset()
+        
+        # Добыли поисковый запрос \ или None
+        search_query = self.request.GET.get('search')
+        
+        # Если поисковый запрос есть, то фильтруем
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) | Q(phone__icontains=search_query)
+            )
+        return queryset

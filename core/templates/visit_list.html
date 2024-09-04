@@ -5,6 +5,14 @@
 {% block content %}
 <div class="container">
     <h1 class="my-4">Список заявок</h1>
+
+    <!-- Форма поиска -->
+    <form method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Поиск по имени или телефону" value="{{ request.GET.search }}">
+            <button class="btn btn-primary" type="submit">Поиск</button>
+        </div>
+    </form>
     <table class="table table-striped">
         <thead>
             <tr>
