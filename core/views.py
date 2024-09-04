@@ -98,6 +98,6 @@ class VisitUpdateView(UpdateView):
 
 
 class VisitDetailView(DetailView):
-    template_name = "visit_form.html"
+    template_name = "visit_detail.html"
     model = Visit
     context_object_name = "visit"
