@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import VisitModelForm
+from .forms import VisitModelForm, VisitEditModelForm
 from .models import Visit, Master, Service
 from django.http import JsonResponse
 from django.views.generic import (
@@ -104,7 +104,7 @@ class VisitUpdateView(UpdateView):
     template_name = "visit_form.html"
     model = Visit
     # fields = ["name", "phone", "comment", "master", "services"] # Мы можем обойтись даже без формы!!!
-    form_class = VisitModelForm
+    form_class = VisitEditModelForm
     # Подтянем url по псевдониму thanks\
     # Функция для поиска маршрутов по имени
     success_url = reverse_lazy("thanks")
