@@ -27,6 +27,11 @@ from core.views import (
 from django.conf.urls.static import static
 from django.conf import settings
 
+from user import urls
+# Импорт include
+from django.conf.urls import include
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", MainView.as_view(), name="main"),
@@ -46,6 +51,9 @@ urlpatterns = [
     path("visit/<int:pk>/delete/", VisitDeleteView.as_view(), name="visit-delete"),
     # ListView
     path("visits/", VisitListView.as_view(), name="visits"),
+
+    # Подключаем пользователей с префиксом user
+    path("user/", include(urls)),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
