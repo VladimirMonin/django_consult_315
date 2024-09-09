@@ -15,6 +15,8 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 from django.db.models import Q
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 MENU = [
         {'title': 'Главная', 'url': '/', 'active': True},
@@ -159,3 +161,10 @@ class VisitListView(ListView):
         return context
     
     
+@login_required
+def protected_function_view(request):
+    return render(request, 'protected.html', get_menu_context())
+
+class ProtectedClassView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'protected.html', get_menu_context())
