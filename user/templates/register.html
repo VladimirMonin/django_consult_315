@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block header %}
+{% include 'menu.html' %}
+{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <div class="row">
+    <section class="col-12 mb-4">
+      <h2>Регистрация</h2>
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Имя пользователя" class="form-control mb-3" required>
+        <input type="password" name="password" placeholder="Пароль" class="form-control mb-3" required>
+        <input type="password" name="confirm_password" placeholder="Подтвердите пароль" class="form-control mb-3" required>
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+      </form>
+    </section>
+  </div>
+</div>
+{% endblock %}
