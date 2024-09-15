@@ -380,3 +380,41 @@ Apply
 Django DeleteView автоматически обрабатывает POST-запрос и выполняет удаление объекта на основе переданного в URL первичного ключа (pk). Он не ожидает никаких специфических данных в теле запроса.
 
 Таким образом, тело POST-запроса при удалении объекта через Django DeleteView будет содержать только CSRF-токен, а сам запрос будет пустым с точки зрения передаваемых данных.
+
+## Logout методом POST
+
+**Вариант 1: Изменение ссылки на форму в menu.html**
+
+В этом варианте мы заменяем простую ссылку на форму с POST-запросом:
+
+```html
+<form method="post" action="{% url 'logout' %}" class="d-inline">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-link nav-link">Выход</button>
+</form>
+```
+
+Этот подход обеспечивает отправку POST-запроса при нажатии на кнопку "Выход", что соответствует ожиданиям стандартного LogoutView Django.
+
+**Вариант 2: Настройка CustomLogoutView для обработки GET-запросов**
+
+В этом варианте мы модифицируем CustomLogoutView в файле user/views.py:
+```python
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+class CustomLogoutView(LogoutView):
+    next_page = 'main'
+    template_name = 'logout.html'
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect(self.get_next_page())
+```
+
+Этот подход позволяет обрабатывать GET-запросы для логаута, сохраняя при этом простую ссылку в меню:
+
+`<a class="nav-link" href="{% url 'logout' %}">Выход</a>`
+
+Оба варианта решают проблему с логаутом, выбор зависит от предпочтений в дизайне и безопасности.
