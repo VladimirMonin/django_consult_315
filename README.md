@@ -429,3 +429,128 @@ class CustomLogoutView(LogoutView):
 - mb-4 добавляет отступ снизу.
 - text-center центрирует текст заголовка.
 - Класс d-grid на кнопке используется для создания блочного элемента с поведением сетки. Это позволяет кнопке занимать всю доступную ширину родительского контейнера, сохраняя при этом правильное выравнивание и отступы.
+
+
+## Lesson 68
+
+1. Вход по Email.
+
+1.1 Нам нужно сделать уникальными Email в БД. Проще всего сделать это в форме регистрации (не пускать такие же)
+
+```python
+class RegisterUserForm(UserCreationForm):
+    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+    class Meta(UserCreationForm.Meta):
+        model = get_user_model()
+        fields = ('username', 'email', 'first_name')
+        labels = {
+            'email': 'E-Mail',
+            'first_name': 'Имя'
+        }
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if get_user_model().objects.filter(email=email).exists():
+            raise ValidationError('Данный адрес электронной почты уже зарегистрирован в системе')
+        return email
+```
+
+1.2 Создать authentication.py в users и создать свой Backend для авторизации
+
+
+```python
+from typing import Any
+from django.contrib.auth.backends import BaseBackend
+from django.contrib.auth import get_user_model
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.http import HttpRequest
+
+"""
+Бэкенды аутентификации в Django используются для аутентификации пользователей. Они определяют, как пользователи идентифицируются и проверяются.
+
+В Django есть несколько встроенных бэкендов аутентификации, но вы также можете создать свой собственный, как показано в вашем коде.
+
+BaseBackend - это базовый класс для создания бэкендов аутентификации. Он не реализует методы аутентификации, но предоставляет общий интерфейс. Вы можете наследовать от этого класса и реализовать свои собственные методы аутентификации.
+
+get_user_model - это функция, которая возвращает текущую активную модель пользователя. Это полезно, если вы используете пользовательскую модель пользователя вместо стандартной модели пользователя Django. Вы можете использовать эту функцию, чтобы получить доступ к модели пользователя и работать с ней, например, для создания нового пользователя или поиска существующего.
+
+В представленном коде реализован бэкенд аутентификации Django, который позволяет аутентифицировать пользователя по его электронной почте. Однако, в текущей реализации нет возможности аутентифицировать пользователя по его имени пользователя (username).
+
+Метод authenticate пытается найти пользователя по переданному email (который здесь называется username). Если пользователь найден и предоставленный пароль совпадает с паролем пользователя, то метод возвращает этого пользователя. В противном случае, если пользователь не найден или найдено несколько пользователей с таким email, метод возвращает None.
+"""
+
+class EmailAuthBackend(BaseBackend):
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        user_model = get_user_model()
+        
+        # Делаем попытку найти пользователя по переданному email
+        try:
+            user = user_model.objects.get(email=username)
+            if user.check_password(password):
+                return user
+            
+        except user_model.DoesNotExist:
+            return None
+        
+        except user_model.MultipleObjectsReturned:
+            return None
+        
+        # def get_user - это метод, который возвращает пользователя по его идентификатору
+    def get_user(self, user_id):
+        user_model = get_user_model()
+        try:
+            return user_model.objects.get(pk=user_id)
+        except user_model.DoesNotExist:
+            return None
+        
+        except user_model.MultipleObjectsReturned:
+            return None
+```
+
+1.3 В settings.py добавить в AUTHENTICATION_BACKENDS
+
+```python 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Стандартный бекенд для аутентификации по username
+    'users.authentication.EmailAuthBackend', 
+```
+
+
+При таком варианте, email может стать и правда уникальным. 
+
+2. Разработка представлений для профиля пользователя
+
+2.1 Базовый шаблон профиля
+2.2 Модель пользователя. img поле для аватарок
+2.3 Главная страница 
+2.4 Сменить пароль
+2.5 Записи списком
+2.6 Детальное отображение записи
+
+3. Изменение пароля (вью и спец инструменты)
+
+
+Использование встроенных представлений Django для смены пароля
+Настройка шаблонов для форм смены пароля
+
+4. Восстановление пароля:
+
+Настройка представлений и шаблонов для сброса пароля
+Интеграция с системой отправки электронной почты
+Сигналы и отправка email:
+
+
+Создание сигналов для определенных событий (например, создание записи)
+Настройка обработчиков сигналов для отправки email-уведомлений
+Перенос ListView и DetailView для визитов в личный кабинет:
+
+Адаптация существующих представлений для работы в контексте личного кабинета
+Создание новых шаблонов или модификация существующих
