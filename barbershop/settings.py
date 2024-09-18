@@ -145,3 +145,9 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # Используется как значение по умолчанию, если явно не е указано во view
 LOGIN_REDIRECT_URL = 'main'
 LOGOUT_REDIRECT_URL = 'main'
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Стандартный бекенд для аутентификации по username
+    "user.authentication.EmailAuthBackend",  # Наш бекенд для аутентификации по email
+]
