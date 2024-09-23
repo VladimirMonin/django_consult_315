@@ -13,7 +13,7 @@
             <button class="btn btn-primary" type="submit">Поиск</button>
         </div>
     </form>
-    <table class="table table-striped">
+    <table class="table table-striped align-middle">
         <thead>
             <tr>
                 <th>Имя</th>
@@ -30,16 +30,19 @@
                 <td><a href="tel:{{ visit.phone }}">{{ visit.phone }}</a></td>
                 <td>{{ visit.created_at }}</td>
                 <td>{{ visit.get_status_display }}</td>
-                <td>
+                <td class="d-flex justify-content-around align-items-center">
                     <a href="{% url 'visit-delete' visit.pk %}" class="btn btn-danger my-2">
                         <i class="bi bi-trash"></i>
                     </a>
                     <a href="{% url 'visit-edit' visit.pk %}" class="btn btn-dark my-2">
                         <i class="bi bi-pencil"></i>
                     </a>
-                    <a href="{% url 'visit-view' visit.pk %}" class="btn btn-dark my-2">
-                        <i class="bi bi-eye"></i>
-                    </a>
+                    {% comment %} Добавляем проверку прав на core.view_visit {% endcomment %}
+                    {% if perms.core.view_visit %}
+                        <a href="{% url 'visit-view' visit.pk %}" class="btn btn-dark my-2">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
