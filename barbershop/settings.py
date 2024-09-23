@@ -169,3 +169,6 @@ EMAIL_ADMIN = os.getenv('EMAIL_HOST_USER')
 
 
 LOGIN_URL = reverse_lazy('login')
+
+HANDLER403 = 'core.views.Custom403View.as_view()'
+HANDLER404 = 'core.views.Custom404View.as_view()'

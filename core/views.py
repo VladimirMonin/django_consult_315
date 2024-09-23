@@ -170,3 +170,12 @@ def protected_function_view(request):
 class ProtectedClassView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'protected.html', get_menu_context())
+    
+
+class Custom403View(TemplateView):
+    template_name = '403.html'
+    status_code = 403
+
+class Custom404View(TemplateView):
+    template_name = '404.html'
+    status_code = 404
