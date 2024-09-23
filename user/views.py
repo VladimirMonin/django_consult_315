@@ -10,7 +10,14 @@ class CustomLoginView(LoginView):
     template_name = 'login.html'
     
     def get_success_url(self):
-        return reverse_lazy('main')
+        """
+        Когда вью авторизации авторизует пользователя, происходит перенаправление на страницу, указанную
+        в  параметре "next" в запросе. Если такой параметр не указан, то происходит перенаправление на домашнюю страниц
+        """
+        next_url = self.request.POST.get('next') or self.request.GET.get('next')
+        return next_url or reverse_lazy('main')
+
+
 
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy('logout')
