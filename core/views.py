@@ -16,7 +16,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 MENU = [
         {'title': 'Главная', 'url': '/', 'active': True},
@@ -112,7 +112,9 @@ class VisitUpdateView(UpdateView):
     success_url = reverse_lazy("thanks")
 
     
-class VisitDetailView(DetailView):
+class VisitDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'core.view_visit'
+    # raise_exception = True
     template_name = "visit_detail.html"
     model = Visit
     context_object_name = "visit"

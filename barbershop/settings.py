@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import re
 from dotenv import load_dotenv
 from django.urls import reverse_lazy
 
@@ -165,3 +166,6 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
 SERVER_EMAIL = os.getenv('EMAIL_HOST_USER')
 EMAIL_ADMIN = os.getenv('EMAIL_HOST_USER')
+
+
+LOGIN_URL = reverse_lazy('login')
