@@ -11,7 +11,7 @@ class Command(BaseCommand):
         self.stdout.write('Создание суперпользователя...')
         User.objects.create_superuser('admin', 'monin_vladimir@mail.ru', 'admin')
 
-        
+
         self.stdout.write('Создание группы модераторов...')
         moderators_group, created = Group.objects.get_or_create(name='Модераторы')
 
@@ -28,4 +28,13 @@ class Command(BaseCommand):
 
         moderators_group.permissions.add(view_master, view_service, view_visit, change_visit, add_visit)
 
-        self.stdout.write(self.style.SUCCESS('Тестовые данные успешно созданы'))
+        self.stdout.write('Загрузка фикстур...')
+        dump_path = os.path.join(os.getcwd(), 'dump.json')
+        if os.path.exists(dump_path):
+            call_command('loaddata', dump_path, verbosity=1)
+            self.stdout.write(self.style.SUCCESS('Фикстуры успешно загружены'))
+        else:
+            self.stdout.write(self.style.WARNING('Файл dump.json не найден в корне проекта'))
+
+            
+        self.stdout.write(self.style.SUCCESS('Все операции успешно выполнены'))
