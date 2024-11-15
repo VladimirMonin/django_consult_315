@@ -22,7 +22,15 @@
 <noscript><div><img src="https://mc.yandex.ru/watch/98944662" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: *.yandex.ru *.yandex.net mc.yandex.ru api-maps.yandex.ru;">
+<meta http-equiv="Content-Security-Policy" content="
+default-src 'self' https: data;
+script-src 'self' 'unsafe-inline' 'unsafe-eval' https://yastatic.net https://*.yandex.net https://*.yandex.ru https://*.yandex.com https://*.yandex-team.ru https://mc.yandex.ru https://api-maps.yandex.ru;
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+font-src 'self' https://fonts.gstatic.com;
+img-src 'self' data: https://mc.yandex.ru;
+connect-src 'self' https://mc.yandex.ru;
+">    
+
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
